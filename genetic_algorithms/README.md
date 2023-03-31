@@ -17,8 +17,7 @@ The genetic algorithm provided includes the following components:
 
 1. Clone the repository and navigate to the folder:
 
-
-2. Modify the parameters in `maximize_ones_genetic_algorithm.py` if desired.
+2. Modify the parameters in **`maximize_ones_genetic_algorithm.py`** if desired.
 
 3. Run the script:
 
