@@ -1,4 +1,5 @@
 # 🧬 Evolutionary Computation 🦾
+
 Evolutionary Computation (EC) is a branch of artificial intelligence that relies on natural evolution processes to find optimal solutions to complex problems. Here's a brief description of EC and its main components using emojis to make it more visual and engaging.
 
 ## 📚 Basic Concepts 🌟
