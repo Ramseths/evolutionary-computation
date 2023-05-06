@@ -7,15 +7,15 @@ from matplotlib.colors import LogNorm
 def objective_function(x):
     return (1 - x[0])**2 + 100 * (x[1] - x[0]**2)**2
 
-# Parámetros
-n_bees = 50
+# Params
+n_bees = 25
 n_dim = 2
 n_iter = 1000
 limit = 50
 bounds = [(-3, 3), (-3, 3)]
 
 
-# Algoritmo Colonia de Abejas Artificiales
+# Artificial Bee Colony
 def abc_algorithm(objective_function, n_bees, n_dim, n_iter, bounds, limit):
 
     def generate_bees(n_bees, n_dim, bounds):
@@ -33,7 +33,7 @@ def abc_algorithm(objective_function, n_bees, n_dim, n_iter, bounds, limit):
 
     for i_iter in range(n_iter):
 
-        # Fase de abejas
+        # Bee Phase
         for i in range(n_bees):
             j = np.random.choice(n_dim)
             phi = np.random.uniform(-1, 1)
@@ -50,7 +50,7 @@ def abc_algorithm(objective_function, n_bees, n_dim, n_iter, bounds, limit):
             else:
                 trial[i] += 1
 
-        # Fase de abeja observadora
+        # Onlooker Bee Phase 
         prob = (np.max(fitness) - fitness) / np.sum(np.max(fitness) - fitness)
         for i in range(n_bees):
             if np.random.uniform() < prob[i]:
@@ -69,14 +69,14 @@ def abc_algorithm(objective_function, n_bees, n_dim, n_iter, bounds, limit):
                 else:
                     trial[i] += 1
 
-        # Abeja exploradora
+        # Explorer Bee Phase
         for i in range(n_bees):
             if trial[i] >= limit:
                 bees[i] = generate_bees(1, n_dim, bounds)[0]
                 fitness[i] = objective_function(bees[i])
                 trial[i] = 0
 
-                # Mejor solución
+                # Best fitness
         if np.min(fitness) < best_fitness:
             best_bee = bees[np.argmin(fitness)]
             best_fitness = np.min(fitness)
@@ -109,7 +109,7 @@ def update(frame):
     return bees_scatter, best_bee_scatter
 
 # Create the animation
-ani = animation.FuncAnimation(fig, update, frames=abc_algorithm(objective_function, n_bees, n_dim, n_iter, bounds, limit), interval=100, blit=True)
+ani = animation.FuncAnimation(fig, update, frames=abc_algorithm(objective_function, n_bees, n_dim, n_iter, bounds, limit), interval=50, blit=True)
 print(best_fitness)
 # Display the animation
 plt.show()
