@@ -7,7 +7,7 @@ from matplotlib.colors import LogNorm
 def objective_function(x):
     return (1 - x[0])**2 + 100 * (x[1] - x[0]**2)**2
 
-# Initialize ABC parameters Artificial Bee Colony
+# Parámetros
 n_bees = 50
 n_dim = 2
 n_iter = 1000
@@ -15,7 +15,7 @@ limit = 50
 bounds = [(-3, 3), (-3, 3)]
 
 
-# ABC algorithm
+# Algoritmo Colonia de Abejas Artificiales
 def abc_algorithm(objective_function, n_bees, n_dim, n_iter, bounds, limit):
 
     def generate_bees(n_bees, n_dim, bounds):
@@ -33,7 +33,7 @@ def abc_algorithm(objective_function, n_bees, n_dim, n_iter, bounds, limit):
 
     for i_iter in range(n_iter):
 
-        # Employed bee phase
+        # Fase de abejas
         for i in range(n_bees):
             j = np.random.choice(n_dim)
             phi = np.random.uniform(-1, 1)
@@ -50,7 +50,7 @@ def abc_algorithm(objective_function, n_bees, n_dim, n_iter, bounds, limit):
             else:
                 trial[i] += 1
 
-        # Onlooker bee phase
+        # Fase de abeja observadora
         prob = (np.max(fitness) - fitness) / np.sum(np.max(fitness) - fitness)
         for i in range(n_bees):
             if np.random.uniform() < prob[i]:
@@ -69,14 +69,14 @@ def abc_algorithm(objective_function, n_bees, n_dim, n_iter, bounds, limit):
                 else:
                     trial[i] += 1
 
-        # Scout bee phase
+        # Abeja exploradora
         for i in range(n_bees):
             if trial[i] >= limit:
                 bees[i] = generate_bees(1, n_dim, bounds)[0]
                 fitness[i] = objective_function(bees[i])
                 trial[i] = 0
 
-                # Update best solution
+                # Mejor solución
         if np.min(fitness) < best_fitness:
             best_bee = bees[np.argmin(fitness)]
             best_fitness = np.min(fitness)
