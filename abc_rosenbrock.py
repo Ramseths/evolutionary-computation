@@ -109,7 +109,7 @@ def update(frame):
     return bees_scatter, best_bee_scatter
 
 # Create the animation
-ani = animation.FuncAnimation(fig, update, frames=abc_algorithm(objective_function, n_bees, n_dim, n_iter, bounds, limit), interval=200, blit=True)
+ani = animation.FuncAnimation(fig, update, frames=abc_algorithm(objective_function, n_bees, n_dim, n_iter, bounds, limit), interval=100, blit=True)
 print(best_fitness)
 # Display the animation
 plt.show()
